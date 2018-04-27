@@ -1,0 +1,26 @@
+{
+  "name": "sonarqube-gitlab-project-sync-remover",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kazuhito-m/sonarqube-gitlab-project-sync-remover.git"
+  },
+  "keywords": [
+    "node",
+    "typescript",
+    "sonarqube",
+    "gitlab",
+    "webpack"
+  ],
+  "author": "kazuhito_m",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kazuhito-m/sonarqube-gitlab-project-sync-remover/issues"
+  },
+  "homepage": "https://github.com/kazuhito-m/sonarqube-gitlab-project-sync-remover#readme"
+}
