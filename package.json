@@ -5,7 +5,7 @@
   "main": "dist/bundle.js",
   "scripts": {
     "build": "webpack",
-    "build_run": "webpack && node dist/bundle.js",
+    "build_run": "webpack && node dist/bundle.js テスト用の 引数 検出",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -29,6 +29,9 @@
     "ts-loader": "^4.3.0",
     "typescript": "^2.9.1",
     "webpack": "^4.10.2",
-    "webpack-cli": "^2.1.4"
+    "webpack-cli": "^2.1.4",
+    "@types/node": "^10.3.0"
+  },
+  "dependencies": {
   }
 }

@@ -16,5 +16,6 @@ module.exports = {
       use: 'ts-loader',
       exclude: /node_modules/
     }]
-  }
+  },
+  target: 'node'
 }
