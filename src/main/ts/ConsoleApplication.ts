@@ -1,8 +1,14 @@
+import Settings from "./config/Settings";
+import Parameters from "./Parameters";
+
 export default class ConoleApplication {
   public run(argv: string[]) {
-    console.log("引数数:" + argv.length);
-    for (var i = 0; i < argv.length; i++) {
-      console.log("argv[" + i + "] = " + argv[i]);
-    }
+    const parameters= new Parameters(argv);
+    parameters.analyzeArgs();
+    const settings: Settings = parameters.loadSettings();
+    const aliases = parameters.loadAliases();
+
+    console.log(settings.gitlabUrl);
+    console.log(aliases["project1"]);
   }
 }
