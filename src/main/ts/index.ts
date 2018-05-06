@@ -1,2 +1,4 @@
 import ConsoleApplication from "./ConsoleApplication";
-new ConsoleApplication().run(process.argv);
+process.on('unhandledRejection', console.dir);
+const app = new ConsoleApplication();
+app.run(process.argv);
