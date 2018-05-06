@@ -19,7 +19,7 @@ export default class SonarQubeRequester {
     const uri = "/api/projects/search?ps=500";
     const response = await this.axios.get(uri, this.basicAuthConfig());
     const resProjects: ProjectApiResponse[] = response.data.components;
-    const projects:SonarQubeProject[] = resProjects.map(rp => new SonarQubeProject(rp));
+    const projects = resProjects.map(rp => new SonarQubeProject(rp));
     return new SonarQubeProjects(projects);
   }
 
