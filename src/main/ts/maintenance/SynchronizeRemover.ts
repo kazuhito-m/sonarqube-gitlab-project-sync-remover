@@ -1,6 +1,7 @@
 import Settings from "../config/Settings";
 import SonarQubeRequester from "./sonarqube/SonarQubeRequester";
 import GitlabRequester from "./gitlab/GitlabRequester";
+import RemoveTargets from "./RemoveTargets";
 
 export default class SynchronizeRemover {
   private readonly sonarQubeRequester: SonarQubeRequester;
@@ -18,14 +19,16 @@ export default class SynchronizeRemover {
   }
 
   public async execute() {
-    const sonarQubeAllProjects = await this.sonarQubeRequester.getAllProjects();
-    const gitlabAllProjects = await this.gitlabRequester.getAllProjects();
+    const sonarQubeProjects = await this.sonarQubeRequester.getAllProjects();
+    const gitlabProjects = await this.gitlabRequester.getAllProjects();
 
-    // debug
-    console.log(sonarQubeAllProjects);
-    const vp = gitlabAllProjects.validProjects();
-    console.log(vp);
-    console.log(vp.length);
-    console.log(this.aliases["project1"]);
+    const removeTargets = new RemoveTargets(
+      sonarQubeProjects,
+      gitlabProjects,
+      this.aliases
+    );
+    const removeProjects = removeTargets.filterd();
+
+    this.sonarQubeRequester.removeProjects(removeProjects);
   }
 }

@@ -23,6 +23,10 @@ export default class SonarQubeRequester {
     return new SonarQubeProjects(projects);
   }
 
+  public removeProjects(projects: SonarQubeProjects) {
+    // TODO 実装
+  }
+
   private basicAuthConfig = () => {
     const settings = this.settings;
     return {
