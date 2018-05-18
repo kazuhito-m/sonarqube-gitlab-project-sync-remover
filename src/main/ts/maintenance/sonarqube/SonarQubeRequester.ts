@@ -1,4 +1,4 @@
-import Settings from "../config/Settings";
+import Settings from "../../config/Settings";
 import SonarQubeProjects from "./SonarQubeProjects";
 import ProjectApiResponse from "./api/ProjectApiResponse";
 import SonarQubeProject from "./SonarQubeProject";

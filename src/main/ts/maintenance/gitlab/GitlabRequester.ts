@@ -1,4 +1,4 @@
-import Settings from "../config/Settings";
+import Settings from "../../config/Settings";
 import GitlabProjects from "./GitlabProjects";
 import GProjectApiResponse from "./api/GProjectApiResponse";
 import GitlabProject from "./GitlabProject";
