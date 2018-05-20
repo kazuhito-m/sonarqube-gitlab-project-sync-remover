@@ -28,4 +28,8 @@ export default class SonarQubeProject {
   public get lastAnalysisDate(): string {
     return this._lastAnalysisDate;
   }
+
+  public get branch():string {
+    return "";
+  }
 }
