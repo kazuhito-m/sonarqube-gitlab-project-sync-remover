@@ -1,6 +1,8 @@
 import ProjectApiResponse from "./api/ProjectApiResponse";
+import ProjectAndBranch from "../ProjectAndBranch";
+import { NOMEM } from "dns";
 
-export default class SonarQubeProject {
+export default class SonarQubeProject implements ProjectAndBranch {
   private readonly _id: string;
   private readonly _key: string;
   private readonly _name: string;
@@ -11,6 +13,19 @@ export default class SonarQubeProject {
     this._key = origin.key;
     this._name = origin.name;
     this._lastAnalysisDate = origin.lastAnalysisDate;
+  }
+
+  private devideBranchName(name: string): string {
+    const branch = name.replace(/.*\ /, "");
+    if (name === branch) return "";
+    return branch;
+  }
+
+  private devideProjectName(name: string): string {
+    const branchNameLength = this.devideBranchName(name).length;
+    if (branchNameLength === 0) return name;
+    const projectNameLength = name.length - (branchNameLength + 1);
+    return name.substring(0, projectNameLength);
   }
 
   public get id(): string {
@@ -29,7 +44,11 @@ export default class SonarQubeProject {
     return this._lastAnalysisDate;
   }
 
-  public get branch():string {
-    return "";
+  public get projectName(): string {
+    return this.devideProjectName(this._name);
+  }
+
+  public get branchName(): string {
+    return this.devideBranchName(this._name);
   }
 }

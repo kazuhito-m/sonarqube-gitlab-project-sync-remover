@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "build_run": "webpack && node dist/bundle.js -s ./config/settings.json -a ./config/aliases.json",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -28,7 +28,11 @@
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/commander": "^2.12.2",
+    "@types/jest": "^23.0.0",
     "@types/node": "^10.3.0",
+    "jest": "^23.1.0",
+    "jest-cli": "^23.1.0",
+    "ts-jest": "^22.4.6",
     "ts-loader": "^4.3.0",
     "typescript": "^2.9.1",
     "webpack": "^4.10.2",
@@ -37,5 +41,21 @@
   "dependencies": {
     "axios": "^0.18.0",
     "commander": "^2.15.1"
+  },
+  "jest": {  
+    "moduleFileExtensions": [  
+      "ts",
+      "js"  
+    ],  
+    "transform": {  
+      "\\.(ts)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"  
+    },  
+    "testMatch": [  
+      "**/src/test/ts/**/*.ts"  
+    ],  
+    "collectCoverage": true,  
+    "collectCoverageFrom": [  
+      "src/main/ts/**/*.ts"  
+    ]
   }
 }
