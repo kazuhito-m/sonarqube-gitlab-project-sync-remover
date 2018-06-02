@@ -1,4 +1,5 @@
 import SonarQubeProjects from "./sonarqube/SonarQubeProjects";
+import SonarQubeProject from "./sonarqube/SonarQubeProject";
 import GitlabProjects from "./gitlab/GitlabProjects";
 
 export default class RemoveTargets {
@@ -17,11 +18,14 @@ export default class RemoveTargets {
   }
 
   public filterd(): SonarQubeProjects {
-    // TODO 実装
-    console.log("RemoveTargets.filted");
-    console.log(this.sonarQubeProjects);
-    console.log(this.gitlabProjects);
+    // SonarQube側のプロジェクトを回しながら、Gitlab側にあれば無視、なければそれを貯める
+    const gitlabNotFoundProjcets: SonarQubeProject[] = this.sonarQubeProjects
+      .validProjects()
+      .filter(sqProject => !this.gitlabProjects.exists(sqProject));
+
+    // Debug
     console.log(this.aliases);
-    return new SonarQubeProjects([]);
+
+    return new SonarQubeProjects(gitlabNotFoundProjcets);
   }
 }
