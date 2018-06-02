@@ -29,13 +29,6 @@ export default class SynchronizeRemover {
     );
     const removeProjects = removeTargets.filterd();
 
-    //debug
-    const prj = removeProjects.validProjects();
-    prj.forEach(i =>
-      console.log(`prj:${i.projectName} , branch:${i.branchName}`)
-    );
-    console.log("削除対象SonarQubeプロジェクト数 : " + prj.length);
-
     this.sonarQubeRequester.removeProjects(removeProjects);
   }
 }

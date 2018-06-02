@@ -1,6 +1,6 @@
 import GProjectApiResponse from "./api/GProjectApiResponse";
-import GitlabRequester from "./GitlabRequester";
 import GitlabBranchs from "./GitlabBranches";
+import ProjectAndBranch from "../ProjectAndBranch";
 
 export default class GitlabProject {
   private readonly _id: number;
@@ -9,18 +9,31 @@ export default class GitlabProject {
   private readonly _pathWithNamespace: string;
   private readonly _mergeRequestsEnabled: boolean;
 
-  private readonly requester: GitlabRequester;
-  private branchLoaded: boolean = false;
-  private _branches: GitlabBranchs = new GitlabBranchs([]);
+  private readonly _branches: GitlabBranchs;
 
-  constructor(origin: GProjectApiResponse, requester: GitlabRequester) {
-    this.requester = requester;
-
+  constructor(origin: GProjectApiResponse, branches: GitlabBranchs) {
     this._id = origin.id;
     this._description = origin.description;
     this._name = origin.name;
     this._pathWithNamespace = origin.path_with_namespace;
     this._mergeRequestsEnabled = origin.merge_requests_enabled;
+    this._branches = branches;
+  }
+
+  public with(branches: GitlabBranchs): GitlabProject {
+    const dummy: GProjectApiResponse = {
+      id: this._id,
+      description: this._description,
+      name: this._name,
+      path_with_namespace: this._pathWithNamespace,
+      merge_requests_enabled: this._mergeRequestsEnabled
+    };
+    return new GitlabProject(dummy, branches);
+  }
+
+  public exists(branch: ProjectAndBranch): boolean {
+    if (this._name !== branch.projectName) return false;
+    return this.branches.exists(branch);
   }
 
   public get id(): number {
@@ -39,14 +52,11 @@ export default class GitlabProject {
     return this._pathWithNamespace;
   }
 
-  public get mergeRequestsEnabled():boolean {
+  public get mergeRequestsEnabled(): boolean {
     return this._mergeRequestsEnabled;
   }
 
-  public async branches(): Promise<GitlabBranchs> {
-    if (this.branchLoaded) return this._branches;
-    this._branches = await this.requester.getBranchsOf(this.id);
-    this.branchLoaded = true;
+  public get branches(): GitlabBranchs {
     return this._branches;
   }
 }

@@ -23,8 +23,14 @@ export default class GitlabRequester {
     const uri = `/api/v4/projects?per_page=100&private_token=${token}`;
     const response = await this.axios.get(uri);
     const resProjects: GProjectApiResponse[] = response.data;
-    const projects = resProjects.map(rp => new GitlabProject(rp, this));
-    return new GitlabProjects(projects);
+    const projects = resProjects.map(rp => new GitlabProject(rp, new GitlabBranchs([])));
+    const withBranchProjects:GitlabProject[] = [];
+    for (const project of projects) {
+      if (!project.mergeRequestsEnabled) continue;
+      const branchs = await this.getBranchsOf(project.id);
+      withBranchProjects.push(project.with(branchs));
+    }
+    return new GitlabProjects(withBranchProjects);
   }
 
   public async getBranchsOf(projectId: number): Promise<GitlabBranchs> {
