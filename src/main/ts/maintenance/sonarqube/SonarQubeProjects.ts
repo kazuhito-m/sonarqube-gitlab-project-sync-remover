@@ -10,4 +10,8 @@ export default class SonarQubeProjects {
   public validProjects(): SonarQubeProject[] {
     return this.projects;
   }
+
+  public joinedKeyes(): string {
+    return this.projects.map(project => project.key).join(",");
+  }
 }
