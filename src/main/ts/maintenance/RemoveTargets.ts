@@ -1,5 +1,7 @@
 import SonarQubeProjects from "./sonarqube/SonarQubeProjects";
 import GitlabProjects from "./gitlab/GitlabProjects";
+import AliasedProjectBranch from "./AliasedProjectBranch";
+import ProjectAndBranch from "./ProjectAndBranch";
 
 export default class RemoveTargets {
   private readonly sonarQubeProjects: SonarQubeProjects;
@@ -17,13 +19,14 @@ export default class RemoveTargets {
   }
 
   public filterd(): SonarQubeProjects {
+    const gitlabProjects: GitlabProjects = this.gitlabProjects;
     const gitlabNotFoundProjcets = this.sonarQubeProjects
       .validProjects()
-      .filter(sqPjWithBranch => this.gitlabProjects.notExists(sqPjWithBranch));
-
-    // Debug
-    console.log(this.aliases);
-
+      .filter(sqPjBranch => gitlabProjects.notExists(this.aliased(sqPjBranch)));
     return new SonarQubeProjects(gitlabNotFoundProjcets);
+  }
+
+  private aliased(origin: ProjectAndBranch): ProjectAndBranch {
+    return new AliasedProjectBranch(origin, this.aliases);
   }
 }
