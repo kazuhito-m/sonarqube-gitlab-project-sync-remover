@@ -1,4 +1,3 @@
-import GProjectApiResponse from "./api/GProjectApiResponse";
 import GitlabBranchs from "./GitlabBranches";
 import ProjectAndBranch from "../ProjectAndBranch";
 
@@ -11,24 +10,31 @@ export default class GitlabProject {
 
   private readonly _branches: GitlabBranchs;
 
-  constructor(origin: GProjectApiResponse, branches: GitlabBranchs) {
-    this._id = origin.id;
-    this._description = origin.description;
-    this._name = origin.name;
-    this._pathWithNamespace = origin.path_with_namespace;
-    this._mergeRequestsEnabled = origin.merge_requests_enabled;
+  constructor(
+    id: number,
+    description: string,
+    name: string,
+    pathWithNamespace: string,
+    mergeRequestsEnabled: boolean,
+    branches: GitlabBranchs
+  ) {
+    this._id = id;
+    this._description = description;
+    this._name = name;
+    this._pathWithNamespace = pathWithNamespace;
+    this._mergeRequestsEnabled = mergeRequestsEnabled;
     this._branches = branches;
   }
 
   public with(branches: GitlabBranchs): GitlabProject {
-    const dummy: GProjectApiResponse = {
-      id: this._id,
-      description: this._description,
-      name: this._name,
-      path_with_namespace: this._pathWithNamespace,
-      merge_requests_enabled: this._mergeRequestsEnabled
-    };
-    return new GitlabProject(dummy, branches);
+    return new GitlabProject(
+      this._id,
+      this._description,
+      this._name,
+      this._pathWithNamespace,
+      this._mergeRequestsEnabled,
+      branches
+    );
   }
 
   public exists(branch: ProjectAndBranch): boolean {

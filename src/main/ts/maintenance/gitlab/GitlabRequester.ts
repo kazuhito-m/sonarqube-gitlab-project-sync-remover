@@ -23,8 +23,8 @@ export default class GitlabRequester {
     const uri = `/api/v4/projects?per_page=100&private_token=${token}`;
     const response = await this.axios.get(uri);
     const resProjects: GProjectApiResponse[] = response.data;
-    const projects = resProjects.map(rp => new GitlabProject(rp, new GitlabBranchs([])));
-    const withBranchProjects:GitlabProject[] = [];
+    const projects = resProjects.map(rp => this.createProject(rp));
+    const withBranchProjects: GitlabProject[] = [];
     for (const project of projects) {
       if (!project.mergeRequestsEnabled) continue;
       const branchs = await this.getBranchsOf(project.id);
@@ -40,5 +40,16 @@ export default class GitlabRequester {
     const resBranchs: GBranchApiResponse[] = response.data;
     const branchs = resBranchs.map(rb => new GitlabBranch(rb));
     return new GitlabBranchs(branchs);
+  }
+
+  private createProject(origin: GProjectApiResponse): GitlabProject {
+    return new GitlabProject(
+      origin.id,
+      origin.description,
+      origin.name,
+      origin.path_with_namespace,
+      origin.merge_requests_enabled,
+      new GitlabBranchs([])
+    );
   }
 }
