@@ -1,6 +1,5 @@
 import ProjectApiResponse from "./api/ProjectApiResponse";
 import ProjectAndBranch from "../ProjectAndBranch";
-import { NOMEM } from "dns";
 
 export default class SonarQubeProject implements ProjectAndBranch {
   private readonly _id: string;
