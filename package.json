@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack",
     "build_run": "webpack && node dist/bundle.js -s ./config/settings.json -a ./config/aliases.json",
+    "run_only": "node dist/bundle.js -s ./config/settings.json -a ./config/aliases.json",
     "test": "jest"
   },
   "repository": {
