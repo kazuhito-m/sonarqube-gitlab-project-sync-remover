@@ -1,4 +1,3 @@
-import Settings from "./config/Settings";
 import Parameters from "./Parameters";
 import SynchronizeRemover from "./maintenance/SynchronizeRemover";
 import axiosBase from "axios";
