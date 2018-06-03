@@ -42,20 +42,20 @@
     "axios": "^0.18.0",
     "commander": "^2.15.1"
   },
-  "jest": {  
-    "moduleFileExtensions": [  
+  "jest": {
+    "moduleFileExtensions": [
       "ts",
-      "js"  
-    ],  
-    "transform": {  
-      "\\.(ts)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"  
-    },  
-    "testMatch": [  
-      "**/src/test/ts/**/*.ts"  
-    ],  
-    "collectCoverage": true,  
-    "collectCoverageFrom": [  
-      "src/main/ts/**/*.ts"  
+      "js"
+    ],
+    "transform": {
+      "\\.(ts)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testMatch": [
+      "**/src/test/ts/**/*.ts"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/main/ts/**/*.ts"
     ]
   }
 }
