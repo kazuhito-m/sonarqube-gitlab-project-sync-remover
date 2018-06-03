@@ -40,7 +40,7 @@ export default class GitlabRequester implements GitlabRepository {
     const uri = `/api/v4/projects/${projectId}/repository/branches?private_token=${token}`;
     const response = await this.axios.get(uri);
     const resBranchs: GBranchApiResponse[] = response.data;
-    const branchs = resBranchs.map(rb => new GitlabBranch(rb));
+    const branchs = resBranchs.map(rb => new GitlabBranch(rb.name));
     return new GitlabBranchs(branchs);
   }
 
