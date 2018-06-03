@@ -23,8 +23,13 @@ export default class SonarQubeRequester {
     return new SonarQubeProjects(projects);
   }
 
-  public removeProjects(projects: SonarQubeProjects) {
-    // TODO 実装
+  public async removeProjects(projects: SonarQubeProjects) {
+    console.log(`削除するSonarQubeProject(${projects.validProjects().length})`);
+    projects.validProjects().forEach(p => console.log(`name:${p.name}`));
+
+    const keys = projects.joinedKeyes();
+    const uri = "/api/projects/bulk_delete";
+    await this.axios.post(uri, { projects: keys }, this.basicAuthConfig());
   }
 
   private basicAuthConfig = () => {
