@@ -19,7 +19,7 @@ export default class RemoveTargets {
   }
 
   public filterd(): SonarQubeProjects {
-    const gitlabProjects: GitlabProjects = this.gitlabProjects;
+    const gitlabProjects = this.gitlabProjects;
     const gitlabNotFoundProjcets = this.sonarQubeProjects
       .validProjects()
       .filter(sqPjBranch => gitlabProjects.notExists(this.aliased(sqPjBranch)));
