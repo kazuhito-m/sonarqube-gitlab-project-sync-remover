@@ -2,6 +2,7 @@ import Settings from "../config/Settings";
 import SonarQubeRequester from "./sonarqube/SonarQubeRequester";
 import GitlabRequester from "./gitlab/GitlabRequester";
 import RemoveTargets from "./RemoveTargets";
+import { AxiosStatic } from "axios";
 
 export default class SynchronizeRemover {
   private readonly sonarQubeRequester: SonarQubeRequester;
@@ -9,7 +10,7 @@ export default class SynchronizeRemover {
   private readonly aliases: { [key: string]: string };
 
   constructor(
-    axiosBase: any,
+    axiosBase: AxiosStatic,
     settings: Settings,
     aliases: { [key: string]: string }
   ) {

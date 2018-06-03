@@ -3,12 +3,13 @@ import SonarQubeProject from "./SonarQubeProject";
 import SonarQubeProjects from "./SonarQubeProjects";
 import ProjectApiResponse from "./api/ProjectApiResponse";
 import * as querystring from "querystring";
+import { AxiosStatic } from "axios";
 
 export default class SonarQubeRequester {
   private readonly settings: Settings;
   private readonly axios: any;
 
-  constructor(settings: Settings, axiosBase: any) {
+  constructor(settings: Settings, axiosBase: AxiosStatic) {
     this.axios = axiosBase.create({
       baseURL: settings.sonarqubeUrl,
       responseType: "json"

@@ -5,12 +5,13 @@ import GitlabProject from "./GitlabProject";
 import GitlabBranchs from "./GitlabBranches";
 import GBranchApiResponse from "./api/GBranchApiResponse";
 import GitlabBranch from "./GitlabBranch";
+import { AxiosStatic, AxiosInstance } from "axios";
 
 export default class GitlabRequester {
   private readonly settings: Settings;
-  private readonly axios: any;
+  private readonly axios: AxiosInstance;
 
-  constructor(settings: Settings, axiosBase: any) {
+  constructor(settings: Settings, axiosBase: AxiosStatic) {
     this.settings = settings;
     this.axios = axiosBase.create({
       baseURL: this.settings.gitlabUrl,

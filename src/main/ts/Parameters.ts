@@ -1,6 +1,6 @@
+import Settings from "./config/Settings";
 import * as fs from "fs";
 import * as program from "commander";
-import Settings from "./config/Settings";
 
 export default class Parameters {
   constructor(args: string[]) {
@@ -10,12 +10,9 @@ export default class Parameters {
       .parse(args);
   }
 
-  public analyzeArgs(): any {
-    if (program.settings === undefined) {
-      throw new Error(
-        "コマンドラインパラメータ「設定ファイル」を指定してください。"
-      );
-    }
+  public analyzeArgs() {
+    if (program.settings === undefined)
+      throw new Error("パラメータ「設定ファイル」を指定してください。");
     return program;
   }
 
@@ -30,7 +27,7 @@ export default class Parameters {
     return this.loadJsonFileToObject(aliasesFilePath);
   }
 
-  private loadJsonFileToObject(filePath: string): any {
+  private loadJsonFileToObject(filePath: string) {
     const jsonText = fs.readFileSync(filePath, "utf8");
     return JSON.parse(jsonText);
   }
