@@ -22,7 +22,7 @@ export default class SonarQubeRequester implements SonarQubeRepository {
     const uri = "/api/projects/search?ps=500";
     const response = await this.axios.get(uri, this.basicAuthConfig());
     const resProjects: ProjectApiResponse[] = response.data.components;
-    const projects = resProjects.map(rp => new SonarQubeProject(rp));
+    const projects = resProjects.map(rp => this.createProject(rp));
     return new SonarQubeProjects(projects);
   }
 
@@ -32,6 +32,15 @@ export default class SonarQubeRequester implements SonarQubeRepository {
     const uri = "/api/projects/bulk_delete";
     const params = querystring.stringify({ projects: projects.joinedKeyes() });
     await this.axios.post(uri, params, this.basicAuthConfig());
+  }
+
+  private createProject(origin: ProjectApiResponse): SonarQubeProject {
+    return new SonarQubeProject(
+      origin.id,
+      origin.key,
+      origin.name,
+      origin.lastAnalysisDate
+    );
   }
 
   private basicAuthConfig() {

@@ -12,10 +12,5 @@ describe("SonarQubeProjects.joinedKeyes のテスト", () => {
 });
 
 function createProject(key: string): SonarQubeProject {
-  return new SonarQubeProject({
-    id: "",
-    key: key,
-    name: "",
-    lastAnalysisDate: ""
-  });
+  return new SonarQubeProject("", key, "", "");
 }

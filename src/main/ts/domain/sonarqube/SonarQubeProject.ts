@@ -1,4 +1,3 @@
-import ProjectApiResponse from "../../infrastracture/datasource/sonarqube/api/ProjectApiResponse";
 import ProjectAndBranch from "../maintenance/ProjectAndBranch";
 
 export default class SonarQubeProject implements ProjectAndBranch {
@@ -7,11 +6,11 @@ export default class SonarQubeProject implements ProjectAndBranch {
   private readonly _name: string;
   private readonly _lastAnalysisDate: string;
 
-  constructor(origin: ProjectApiResponse) {
-    this._id = origin.id;
-    this._key = origin.key;
-    this._name = origin.name;
-    this._lastAnalysisDate = origin.lastAnalysisDate;
+  constructor(id: string, key: string, name: string, lastAnalysisDate: string) {
+    this._id = id;
+    this._key = key;
+    this._name = name;
+    this._lastAnalysisDate = lastAnalysisDate;
   }
 
   private devideBranchName(name: string): string {

@@ -1,5 +1,4 @@
 import SonarQubeProject from "../../../../main/ts/domain/sonarqube/SonarQubeProject";
-import ProjectApiResponse from "../../../../main/ts/infrastracture/datasource/sonarqube/api/ProjectApiResponse";
 jest.dontMock("../../../../main/ts/domain/sonarqube/SonarQubeProject");
 
 describe("SonarQubeProject.branchName のテスト", () => {
@@ -39,11 +38,5 @@ describe("SonarQubeProject.projectName のテスト", () => {
 // Utsils
 
 function createSut(projectName: string): SonarQubeProject {
-  const apiItem: ProjectApiResponse = {
-    id: "1",
-    key: "",
-    name: projectName,
-    lastAnalysisDate: ""
-  };
-  return new SonarQubeProject(apiItem);
+  return new SonarQubeProject("1", "", projectName, "");
 }
