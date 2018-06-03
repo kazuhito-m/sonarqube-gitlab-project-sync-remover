@@ -1,7 +1,7 @@
 import Settings from "../../config/Settings";
+import SonarQubeProject from "./SonarQubeProject";
 import SonarQubeProjects from "./SonarQubeProjects";
 import ProjectApiResponse from "./api/ProjectApiResponse";
-import SonarQubeProject from "./SonarQubeProject";
 import * as querystring from "querystring";
 
 export default class SonarQubeRequester {
@@ -9,11 +9,11 @@ export default class SonarQubeRequester {
   private readonly axios: any;
 
   constructor(settings: Settings, axiosBase: any) {
-    this.settings = settings;
     this.axios = axiosBase.create({
-      baseURL: this.settings.sonarqubeUrl,
+      baseURL: settings.sonarqubeUrl,
       responseType: "json"
     });
+    this.settings = settings;
   }
 
   public async getAllProjects(): Promise<SonarQubeProjects> {
@@ -42,8 +42,8 @@ export default class SonarQubeRequester {
   }
 
   private loggingRemoveProjects(projects: SonarQubeProjects) {
-    const list = projects.validProjects();
-    console.log(`削除するSonarQubeProject(${list.length})`);
-    list.forEach(p => console.log(`name:${p.name}`));
+    const names = projects.validProjects().map(project => project.name);
+    console.log(`削除するSonarQubeProject(${names.length})`);
+    names.forEach(name => console.log(`name:${name}`));
   }
 }
