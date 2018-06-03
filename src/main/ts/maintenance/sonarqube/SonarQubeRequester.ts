@@ -27,6 +27,7 @@ export default class SonarQubeRequester {
 
   public async removeProjects(projects: SonarQubeProjects) {
     this.loggingRemoveProjects(projects);
+    if (projects.empty()) return;
     const uri = "/api/projects/bulk_delete";
     const params = querystring.stringify({ projects: projects.joinedKeyes() });
     await this.axios.post(uri, params, this.basicAuthConfig());
