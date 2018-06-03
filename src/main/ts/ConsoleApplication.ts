@@ -1,6 +1,6 @@
-import Parameters from "./Parameters";
-import SynchronizeRemover from "./maintenance/SynchronizeRemover";
 import axiosBase from "axios";
+import Parameters from "./Parameters";
+import SynchronizeRemover from "./domain/maintenance/SynchronizeRemover";
 
 export default class ConoleApplication {
   public async run(argv: string[]) {

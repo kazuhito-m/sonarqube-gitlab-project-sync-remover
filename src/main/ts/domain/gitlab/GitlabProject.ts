@@ -1,5 +1,5 @@
 import GitlabBranchs from "./GitlabBranches";
-import ProjectAndBranch from "../ProjectAndBranch";
+import ProjectAndBranch from "../maintenance/ProjectAndBranch";
 
 export default class GitlabProject {
   private readonly _id: number;

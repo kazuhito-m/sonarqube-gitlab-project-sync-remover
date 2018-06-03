@@ -1,11 +1,10 @@
-import GBranchApiResponse from "./api/GBranchApiResponse";
-import ProjectAndBranch from "../ProjectAndBranch";
+import ProjectAndBranch from "../maintenance/ProjectAndBranch";
 
 export default class GitlabProject {
   private readonly _name: string;
 
-  constructor(origin: GBranchApiResponse) {
-    this._name = origin.name;
+  constructor(name:string) {
+    this._name = name;
   }
 
   public sameOf(otherBranch : ProjectAndBranch) {

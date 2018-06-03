@@ -1,6 +1,6 @@
-import SonarQubeProject from "../../../../main/ts/maintenance/sonarqube/SonarQubeProject";
-import ProjectApiResponse from "../../../../main/ts/maintenance/sonarqube/api/ProjectApiResponse";
-jest.dontMock("../../../../main/ts/maintenance/sonarqube/SonarQubeProject");
+import SonarQubeProject from "../../../../main/ts/domain/sonarqube/SonarQubeProject";
+import ProjectApiResponse from "../../../../main/ts/infrastracture/datasource/sonarqube/api/ProjectApiResponse";
+jest.dontMock("../../../../main/ts/domain/sonarqube/SonarQubeProject");
 
 describe("SonarQubeProject.branchName のテスト", () => {
   it("代表名をからブランチ名を割り出せる", () => {

@@ -1,11 +1,12 @@
-import Settings from "../../config/Settings";
-import SonarQubeProject from "./SonarQubeProject";
-import SonarQubeProjects from "./SonarQubeProjects";
-import ProjectApiResponse from "./api/ProjectApiResponse";
 import * as querystring from "querystring";
 import { AxiosStatic, AxiosInstance } from "axios";
+import ProjectApiResponse from "./api/ProjectApiResponse";
+import Settings from "../../../domain/config/Settings";
+import SonarQubeRepository from "../../../domain/sonarqube/SonarQubeRepository";
+import SonarQubeProjects from "../../../domain/sonarqube/SonarQubeProjects";
+import SonarQubeProject from "../../../domain/sonarqube/SonarQubeProject";
 
-export default class SonarQubeRequester {
+export default class SonarQubeRequester implements SonarQubeRepository {
   private readonly settings: Settings;
   private readonly axios: AxiosInstance;
 

@@ -1,5 +1,5 @@
-import ProjectApiResponse from "./api/ProjectApiResponse";
-import ProjectAndBranch from "../ProjectAndBranch";
+import ProjectApiResponse from "../../infrastracture/datasource/sonarqube/api/ProjectApiResponse";
+import ProjectAndBranch from "../maintenance/ProjectAndBranch";
 
 export default class SonarQubeProject implements ProjectAndBranch {
   private readonly _id: string;

@@ -1,5 +1,5 @@
 import GitlabProject from "./GitlabProject";
-import ProjectAndBranch from "../ProjectAndBranch";
+import ProjectAndBranch from "../maintenance/ProjectAndBranch";
 
 export default class GitlabProjects {
   private readonly projects: GitlabProject[];

@@ -1,6 +1,6 @@
-import AliasedProjectBranch from "../../../main/ts/maintenance/AliasedProjectBranch";
-import ProjectAndBranch from "../../../main/ts/maintenance/ProjectAndBranch";
-jest.dontMock("../../../main/ts/maintenance/AliasedProjectBranch");
+import ProjectAndBranch from "../../../../main/ts/domain/maintenance/ProjectAndBranch";
+import AliasedProjectBranch from "../../../../main/ts/domain/maintenance/AliasedProjectBranch";
+jest.dontMock("../../../../main/ts/domain/maintenance/AliasedProjectBranch");
 
 const aliases: { [key: string]: string } = {
   元の名前: "置き換えた名前",

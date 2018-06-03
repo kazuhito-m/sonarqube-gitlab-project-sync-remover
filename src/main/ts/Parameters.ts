@@ -1,4 +1,4 @@
-import Settings from "./config/Settings";
+import Settings from "./domain/config/Settings";
 import * as fs from "fs";
 import * as program from "commander";
 

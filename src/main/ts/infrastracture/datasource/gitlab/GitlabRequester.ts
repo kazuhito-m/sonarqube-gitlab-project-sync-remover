@@ -1,13 +1,14 @@
-import Settings from "../../config/Settings";
-import GitlabProjects from "./GitlabProjects";
-import GProjectApiResponse from "./api/GProjectApiResponse";
-import GitlabProject from "./GitlabProject";
-import GitlabBranchs from "./GitlabBranches";
-import GBranchApiResponse from "./api/GBranchApiResponse";
-import GitlabBranch from "./GitlabBranch";
 import { AxiosStatic, AxiosInstance } from "axios";
+import GProjectApiResponse from "./api/GProjectApiResponse";
+import GBranchApiResponse from "./api/GBranchApiResponse";
+import Settings from "../../../domain/config/Settings";
+import GitlabRepository from "../../../domain/gitlab/GitlabRepository";
+import GitlabProjects from "../../../domain/gitlab/GitlabProjects";
+import GitlabProject from "../../../domain/gitlab/GitlabProject";
+import GitlabBranchs from "../../../domain/gitlab/GitlabBranches";
+import GitlabBranch from "../../../domain/gitlab/GitlabBranch";
 
-export default class GitlabRequester {
+export default class GitlabRequester implements GitlabRepository {
   private readonly settings: Settings;
   private readonly axios: AxiosInstance;
 
