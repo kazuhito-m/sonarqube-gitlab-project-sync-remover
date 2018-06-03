@@ -3,11 +3,11 @@ import SonarQubeProject from "./SonarQubeProject";
 import SonarQubeProjects from "./SonarQubeProjects";
 import ProjectApiResponse from "./api/ProjectApiResponse";
 import * as querystring from "querystring";
-import { AxiosStatic } from "axios";
+import { AxiosStatic, AxiosInstance } from "axios";
 
 export default class SonarQubeRequester {
   private readonly settings: Settings;
-  private readonly axios: any;
+  private readonly axios: AxiosInstance;
 
   constructor(settings: Settings, axiosBase: AxiosStatic) {
     this.axios = axiosBase.create({
