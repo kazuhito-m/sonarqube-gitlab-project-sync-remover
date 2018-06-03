@@ -1,6 +1,6 @@
 import axiosBase from "axios";
-import Parameters from "./Parameters";
-import SynchronizeRemover from "./domain/maintenance/SynchronizeRemover";
+import Parameters from "./infrastracture/datasource/config/Parameters";
+import SynchronizeRemoveService from "./application/maintenance/SynchronizeRemoveService";
 
 export default class ConoleApplication {
   public async run(argv: string[]) {
@@ -9,7 +9,7 @@ export default class ConoleApplication {
     const settings = parameters.loadSettings();
     const aliases = parameters.loadAliases();
 
-    const syncRemover = new SynchronizeRemover(axiosBase, settings, aliases);
-    syncRemover.execute();
+    const syncRemover = new SynchronizeRemoveService(axiosBase, settings, aliases);
+    syncRemover.synchronizeRemove();
   }
 }

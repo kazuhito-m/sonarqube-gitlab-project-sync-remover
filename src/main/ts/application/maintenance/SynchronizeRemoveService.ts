@@ -1,12 +1,12 @@
 import { AxiosStatic } from "axios";
-import RemoveTargets from "./RemoveTargets";
-import Settings from "../config/Settings";
-import SonarQubeRepository from "../sonarqube/SonarQubeRepository";
-import SonarQubeRequester from "../../infrastracture/datasource/maintenance/sonarqube/SonarQubeRequester";
-import GitlabRequester from "../../infrastracture/datasource/maintenance/gitlab/GitlabRequester";
-import GitlabRepository from "../gitlab/GitlabRepository";
+import SonarQubeRepository from "../../domain/sonarqube/SonarQubeRepository";
+import GitlabRepository from "../../domain/gitlab/GitlabRepository";
+import Settings from "../../domain/config/Settings";
+import SonarQubeRequester from "../../infrastracture/datasource/sonarqube/SonarQubeRequester";
+import GitlabRequester from "../../infrastracture/datasource/gitlab/GitlabRequester";
+import RemoveTargets from "../../domain/maintenance/RemoveTargets";
 
-export default class SynchronizeRemover {
+export default class SynchronizeRemoveService {
   private readonly sonarQubeRepository: SonarQubeRepository;
   private readonly gitlabRepository: GitlabRepository;
   private readonly aliases: { [key: string]: string };
@@ -21,7 +21,7 @@ export default class SynchronizeRemover {
     this.aliases = aliases;
   }
 
-  public async execute() {
+  public async synchronizeRemove() {
     const sonarQubeProjects = await this.sonarQubeRepository.getAllProjects();
     const gitlabProjects = await this.gitlabRepository.getAllProjects();
 
