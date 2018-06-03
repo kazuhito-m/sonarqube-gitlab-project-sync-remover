@@ -1,7 +1,7 @@
-import SonarQubeProjects from "./sonarqube/SonarQubeProjects";
-import GitlabProjects from "./gitlab/GitlabProjects";
 import AliasedProjectBranch from "./AliasedProjectBranch";
 import ProjectAndBranch from "./ProjectAndBranch";
+import SonarQubeProjects from "../sonarqube/SonarQubeProjects";
+import GitlabProjects from "../gitlab/GitlabProjects";
 
 export default class RemoveTargets {
   private readonly sonarQubeProjects: SonarQubeProjects;

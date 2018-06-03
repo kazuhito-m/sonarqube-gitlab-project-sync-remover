@@ -1,6 +1,6 @@
-import Settings from "./domain/config/Settings";
 import * as fs from "fs";
 import * as program from "commander";
+import Settings from "../../../domain/config/Settings";
 
 export default class Parameters {
   constructor(args: string[]) {
