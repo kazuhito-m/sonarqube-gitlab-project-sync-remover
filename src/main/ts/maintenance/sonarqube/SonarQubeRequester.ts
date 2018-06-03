@@ -2,6 +2,7 @@ import Settings from "../../config/Settings";
 import SonarQubeProjects from "./SonarQubeProjects";
 import ProjectApiResponse from "./api/ProjectApiResponse";
 import SonarQubeProject from "./SonarQubeProject";
+import * as querystring from "querystring";
 
 export default class SonarQubeRequester {
   private readonly settings: Settings;
@@ -24,15 +25,13 @@ export default class SonarQubeRequester {
   }
 
   public async removeProjects(projects: SonarQubeProjects) {
-    console.log(`削除するSonarQubeProject(${projects.validProjects().length})`);
-    projects.validProjects().forEach(p => console.log(`name:${p.name}`));
-
-    const keys = projects.joinedKeyes();
+    this.loggingRemoveProjects(projects);
     const uri = "/api/projects/bulk_delete";
-    await this.axios.post(uri, { projects: keys }, this.basicAuthConfig());
+    const params = querystring.stringify({ projects: projects.joinedKeyes() });
+    await this.axios.post(uri, params, this.basicAuthConfig());
   }
 
-  private basicAuthConfig = () => {
+  private basicAuthConfig() {
     const settings = this.settings;
     return {
       auth: {
@@ -40,5 +39,11 @@ export default class SonarQubeRequester {
         password: settings.sonarqubePassword
       }
     };
-  };
+  }
+
+  private loggingRemoveProjects(projects: SonarQubeProjects) {
+    const list = projects.validProjects();
+    console.log(`削除するSonarQubeProject(${list.length})`);
+    list.forEach(p => console.log(`name:${p.name}`));
+  }
 }
