@@ -1,12 +1,12 @@
-import { AxiosStatic, AxiosInstance } from "axios";
-import GProjectApiResponse from "./api/GProjectApiResponse";
-import GBranchApiResponse from "./api/GBranchApiResponse";
-import Settings from "../../../domain/config/Settings";
-import GitlabRepository from "../../../domain/gitlab/GitlabRepository";
-import GitlabProjects from "../../../domain/gitlab/GitlabProjects";
-import GitlabProject from "../../../domain/gitlab/GitlabProject";
-import GitlabBranchs from "../../../domain/gitlab/GitlabBranches";
-import GitlabBranch from "../../../domain/gitlab/GitlabBranch";
+import { AxiosStatic, AxiosInstance } from 'axios';
+import GProjectApiResponse from './api/GProjectApiResponse';
+import GBranchApiResponse from './api/GBranchApiResponse';
+import Settings from '../../../domain/config/Settings';
+import GitlabRepository from '../../../domain/gitlab/GitlabRepository';
+import GitlabProjects from '../../../domain/gitlab/GitlabProjects';
+import GitlabProject from '../../../domain/gitlab/GitlabProject';
+import GitlabBranchs from '../../../domain/gitlab/GitlabBranches';
+import GitlabBranch from '../../../domain/gitlab/GitlabBranch';
 
 export default class GitlabRequester implements GitlabRepository {
   private readonly settings: Settings;
@@ -16,7 +16,7 @@ export default class GitlabRequester implements GitlabRepository {
     this.settings = settings;
     this.axios = axiosBase.create({
       baseURL: this.settings.gitlabUrl,
-      responseType: "json"
+      responseType: 'json'
     });
   }
 
@@ -29,16 +29,21 @@ export default class GitlabRequester implements GitlabRepository {
     const withBranchProjects: GitlabProject[] = [];
     for (const project of projects) {
       if (!project.mergeRequestsEnabled) continue;
-      const branchs = await this.getBranchsOf(project.id);
+      const branchs = await this.getBranchsOf(project);
       withBranchProjects.push(project.with(branchs));
     }
     return new GitlabProjects(withBranchProjects);
   }
 
-  public async getBranchsOf(projectId: number): Promise<GitlabBranchs> {
+  private async getBranchsOf(project: GitlabProject): Promise<GitlabBranchs> {
     const token = this.settings.gitlabPrivateAccessToken;
-    const uri = `/api/v4/projects/${projectId}/repository/branches?private_token=${token}`;
-    const response = await this.axios.get(uri);
+    const uri = `/api/v4/projects/${project.id}/repository/branches?private_token=${token}`;
+    let response = { data: [] };
+    try {
+      response = await this.axios.get(uri);
+    } catch (e) {
+      console.log(`gitからbranchが取得できませんでした。projectName:${project.name}, id:${project.id}`);
+    }
     const resBranchs: GBranchApiResponse[] = response.data;
     const branchs = resBranchs.map(rb => new GitlabBranch(rb.name));
     return new GitlabBranchs(branchs);
