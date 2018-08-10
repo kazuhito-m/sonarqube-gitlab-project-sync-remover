@@ -1,4 +1,6 @@
 {
 	"project1" : "alpha",
-	"project2" : "brabo"
+	"project2" : "brabo",
+	"project_server" : "same_project",
+	"project_client" : "same_project"
 }
