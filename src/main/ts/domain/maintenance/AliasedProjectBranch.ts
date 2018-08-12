@@ -1,17 +1,17 @@
 import ProjectAndBranch from "./ProjectAndBranch";
+import Aliases from '../config/Aliases';
 
 export default class AliasedProjectBranch implements ProjectAndBranch {
   private readonly origin: ProjectAndBranch;
-  private readonly aliases: { [key: string]: string };
+  private readonly aliases: Aliases;
 
-  constructor(origin: ProjectAndBranch, aliases: { [key: string]: string }) {
+  constructor(origin: ProjectAndBranch, aliases: Aliases) {
     this.origin = origin;
     this.aliases = aliases;
   }
 
   private aliasedName(originName: string): string {
-    if (originName in this.aliases) return this.aliases[originName];
-    return originName;
+    return this.aliases.aliasName(originName);
   }
 
   public get projectName(): string {

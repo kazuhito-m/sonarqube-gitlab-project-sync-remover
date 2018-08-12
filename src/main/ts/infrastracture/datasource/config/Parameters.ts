@@ -1,6 +1,7 @@
 import * as fs from "fs";
 import * as program from "commander";
 import Settings from "../../../domain/config/Settings";
+import Aliases from '../../../domain/config/Aliases';
 
 export default class Parameters {
   constructor(args: string[]) {
@@ -21,10 +22,11 @@ export default class Parameters {
     return this.loadJsonFileToObject(settingFilePath);
   }
 
-  public loadAliases(): { [key: string]: string } {
+  public loadAliases(): Aliases {
     const aliasesFilePath: string = program.aliases;
-    if (aliasesFilePath === undefined) return {};
-    return this.loadJsonFileToObject(aliasesFilePath);
+    if (aliasesFilePath === undefined) return Aliases.empty();
+    const json = this.loadJsonFileToObject(aliasesFilePath);
+    return new Aliases(json);
   }
 
   private loadJsonFileToObject(filePath: string) {

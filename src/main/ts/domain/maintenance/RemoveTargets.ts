@@ -2,16 +2,17 @@ import AliasedProjectBranch from "./AliasedProjectBranch";
 import ProjectAndBranch from "./ProjectAndBranch";
 import SonarQubeProjects from "../sonarqube/SonarQubeProjects";
 import GitlabProjects from "../gitlab/GitlabProjects";
+import Aliases from '../config/Aliases';
 
 export default class RemoveTargets {
   private readonly sonarQubeProjects: SonarQubeProjects;
   private readonly gitlabProjects: GitlabProjects;
-  private readonly aliases: { [key: string]: string };
+  private readonly aliases: Aliases;;
 
   constructor(
     sonarQubeProjects: SonarQubeProjects,
     gitlabProjects: GitlabProjects,
-    aliases: { [key: string]: string }
+    aliases: Aliases
   ) {
     this.aliases = aliases;
     this.sonarQubeProjects = sonarQubeProjects;
