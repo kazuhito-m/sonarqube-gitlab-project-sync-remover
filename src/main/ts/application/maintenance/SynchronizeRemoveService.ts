@@ -5,16 +5,17 @@ import Settings from "../../domain/config/Settings";
 import SonarQubeRequester from "../../infrastracture/datasource/sonarqube/SonarQubeRequester";
 import GitlabRequester from "../../infrastracture/datasource/gitlab/GitlabRequester";
 import RemoveTargets from "../../domain/maintenance/RemoveTargets";
+import Aliases from '../../domain/config/Aliases';
 
 export default class SynchronizeRemoveService {
   private readonly sonarQubeRepository: SonarQubeRepository;
   private readonly gitlabRepository: GitlabRepository;
-  private readonly aliases: { [key: string]: string };
+  private readonly aliases: Aliases;
 
   constructor(
     axiosBase: AxiosStatic,
     settings: Settings,
-    aliases: { [key: string]: string }
+    aliases: Aliases
   ) {
     this.sonarQubeRepository = new SonarQubeRequester(settings, axiosBase);
     this.gitlabRepository = new GitlabRequester(settings, axiosBase);
