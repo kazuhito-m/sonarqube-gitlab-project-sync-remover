@@ -4,4 +4,5 @@ export default interface Settings {
   sonarqubePassword: string;
   gitlabUrl: string;
   gitlabPrivateAccessToken: string;
+  dryRun: boolean;
 }

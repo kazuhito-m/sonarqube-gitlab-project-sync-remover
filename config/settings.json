@@ -3,5 +3,6 @@
   "sonarqubeUserName": "xxx",
   "sonarqubePassword": "yyy",
   "gitlabUrl": "http://example.com",
-  "gitlabPrivateAccessToken": "zzz"
+  "gitlabPrivateAccessToken": "zzz",
+  "dryRun": false
 }

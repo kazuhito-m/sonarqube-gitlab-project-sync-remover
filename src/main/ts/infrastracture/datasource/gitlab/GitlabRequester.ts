@@ -22,10 +22,16 @@ export default class GitlabRequester implements GitlabRepository {
 
   public async getAllProjects(): Promise<GitlabProjects> {
     const token = this.settings.gitlabPrivateAccessToken;
-    const uri = `/api/v4/projects?per_page=100&private_token=${token}`;
-    const response = await this.axios.get(uri);
-    const resProjects: GProjectApiResponse[] = response.data;
-    const projects = resProjects.map(rp => this.createProject(rp));
+    const uriBase = `/api/v4/projects?per_page=100&archived=false&private_token=${token}`;
+    let resAllProjects: GProjectApiResponse[] = [];
+    for (let page = 1; page < 100; page++) {
+      const uri = `${uriBase}&page=${page}`      
+      const response = await this.axios.get(uri);
+      const resProjects: GProjectApiResponse[] = response.data;
+      if (resProjects.length === 0) break;
+      resAllProjects = resAllProjects.concat(resProjects);
+    }
+    const projects = resAllProjects.map(rp => this.createProject(rp));
     const withBranchProjects: GitlabProject[] = [];
     for (const project of projects) {
       if (!project.mergeRequestsEnabled) continue;
