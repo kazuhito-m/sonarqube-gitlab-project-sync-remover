@@ -31,6 +31,10 @@ export default class SonarQubeRequester implements SonarQubeRepository {
     if (projects.empty()) return;
     const uri = "/api/projects/bulk_delete";
     const params = querystring.stringify({ projects: projects.joinedKeyes() });
+    if (this.settings.dryRun) {
+      console.log('SonarQube projedct delete Dry Run.');
+      return;
+    }
     await this.axios.post(uri, params, this.basicAuthConfig());
   }
 
